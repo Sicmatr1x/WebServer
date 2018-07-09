@@ -30,12 +30,13 @@ public class ServletLoader {
 			String value = (String)entry.getValue();
 			try {
 				// 一般尽量采用这种形式
+				System.out.println("ServletLoader:load():" + SERVLET_FLODER_PATH + key + "Servlet" + ",mapperr=" + value);
 				servletClass = (Class<Servlet>) Class.forName(SERVLET_FLODER_PATH + key + "Servlet");
 				servletMap.put(value, servletClass);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println("ServletLoader:load():key:" + key + ",value :" + value);
+			System.out.println("ServletLoader:load():key=" + key + ",mapperr=" + value);
 		}
 		
 		return servletMap;

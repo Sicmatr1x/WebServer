@@ -1,8 +1,6 @@
 package com.joe.controller;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
@@ -41,11 +39,25 @@ public class DefaultServlet implements Servlet {
 			response.setBody(sBuilder.toString());
 			String type = fileReader.getFileType();
 			response.setType(type);
+			response.setState("200");
 			response.init();
 			response.sendResponse();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String hostIP = null;
+			hostIP = fileList.getProperty(fileReader.getFileName());
+			if (hostIP != null) {
+				try {
+					response.setState("302");
+					response.setLocation(hostIP);
+					response.sendResponse();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.out.println("DefaultServlet:doGet():" + e.getMessage() + ",find in:" + hostIP);
+				return;
+			}
+//			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

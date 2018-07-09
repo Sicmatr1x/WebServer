@@ -42,7 +42,7 @@ public class Processer implements Runnable {
 			// find file
 			Servlet defaultServlet = new DefaultServlet();
 			defaultServlet.init();
-			defaultServlet.doGet();
+			defaultServlet.doGet(request, response);
 			
 			// find servlet
 			if((servletClass = this.servletMap.get("/" + args[1])) != null) {
@@ -57,9 +57,13 @@ public class Processer implements Runnable {
 				methodArgList[0] = request;
 				methodArgList[1] = response;
 				try {
-					initMethod.invoke(servletClass);
-					method.invoke(servletClass, methodArgList);
+					Servlet servlet = servletClass.newInstance();
+					initMethod.invoke(servlet);
+					method.invoke(servlet, methodArgList);
 				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

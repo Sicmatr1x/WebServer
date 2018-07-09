@@ -36,11 +36,8 @@ public class Server {
 		fileList = PropertiesLoader.getFileListProperties("fileList.properties");
 		System.out.println("fileList.properties:" + fileList);
 		
-		System.out.println("loading library.obj...");
-		Library library = Library.initLibraryFromFile(new File(Server.LIBRARY_PATH));
-		System.out.println("library.obj:" + library);
-		
 		ServletLoader sl = new ServletLoader();
+		sl.init();
 		Map<String, Class<Servlet>> servletMap = sl.load();
 		
 		try {

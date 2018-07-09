@@ -34,6 +34,7 @@ public class Response {
 		if(this.location != null)
 			this.stringBuilder.append("Location:" + this.location + "\n");
 		this.stringBuilder.append("\n");
+		this.head = this.stringBuilder.toString();
 	}
 	
 	public void initBody() {
@@ -48,7 +49,9 @@ public class Response {
 	public void sendResponse() throws IOException {
 		System.out.println("sendResponse");
 		OutputStream os = socket.getOutputStream();
-		os.write((this.head + this.body).getBytes());
+		os.write((this.stringBuilder.toString()).getBytes());
+		System.out.println("Response:sendResponse():");
+		System.out.println(this.stringBuilder.toString());
 		os.close();
 	}
 

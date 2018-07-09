@@ -10,7 +10,7 @@ public class PropertiesLoader {
 		Properties fileList = new Properties();//获取配置文件的对象
 		FileReader in;
 		try {
-			in = new FileReader("fileList.properties");//获取输入流
+			in = new FileReader(path);//获取输入流
 			fileList.load(in);//将流加载到配置文件对象中
 			in.close();
 		} catch (FileNotFoundException e) {
