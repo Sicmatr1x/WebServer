@@ -74,10 +74,28 @@ public class Processer implements Runnable {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Response response = new Response(socket);
+			response.setState("500 Internal Server Error");
+			response.setBody(e.getLocalizedMessage());
+			response.init();
+			try {
+				response.sendResponse();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+//			e.printStackTrace();
 		} catch (NoSuchMethodException e) { // unsupposed request type
 			// TODO Auto-generated catch block
+			Response response = new Response(socket);
+			response.setState("404 Not Found");
+			response.init();
+			try {
+				response.sendResponse();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block

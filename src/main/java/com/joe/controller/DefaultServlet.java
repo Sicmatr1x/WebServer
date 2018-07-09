@@ -39,7 +39,6 @@ public class DefaultServlet implements Servlet {
 			response.setBody(sBuilder.toString());
 			String type = fileReader.getFileType();
 			response.setType(type);
-			response.setState("200");
 			response.init();
 			response.sendResponse();
 		} catch (FileNotFoundException e) {
@@ -47,7 +46,7 @@ public class DefaultServlet implements Servlet {
 			hostIP = fileList.getProperty(fileReader.getFileName());
 			if (hostIP != null) {
 				try {
-					response.setState("302");
+					response.setState("302 Move Temporarily");
 					response.setLocation(hostIP);
 					response.sendResponse();
 				} catch (IOException e1) {

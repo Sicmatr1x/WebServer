@@ -9,7 +9,7 @@ public class Response {
 	private Socket socket;
 	
 	private String type = "text/html";
-	private String state = "200";
+	private String state = "200 OK";
 	private String location = null;
 	
 	private String head;
@@ -29,7 +29,7 @@ public class Response {
 	}
 	
 	public void initHead() {
-		this.stringBuilder.append("HTTP/1.1 " + this.state + " OK\n");
+		this.stringBuilder.append("HTTP/1.1 " + this.state + "\n");
 		this.stringBuilder.append("Content-Type: " + this.type + ";charset=utf-8\n");
 		if(this.location != null)
 			this.stringBuilder.append("Location:" + this.location + "\n");
