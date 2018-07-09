@@ -1,4 +1,4 @@
-package joe.WebServer;
+package com.joe.server;
 
 /**
  * Hello world!

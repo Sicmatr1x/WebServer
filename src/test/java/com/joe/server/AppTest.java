@@ -1,4 +1,4 @@
-package joe.WebServer;
+package com.joe.server;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
